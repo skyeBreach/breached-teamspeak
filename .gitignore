@@ -6,7 +6,6 @@
 
 # VSCode files
 .DS_Store
-.vscode
 
 # Visual Studio files
 .vs
