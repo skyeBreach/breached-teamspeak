@@ -90,11 +90,11 @@ configure_file(
 
 # Defines the paths for Qt, so CMake knows where it is
 set(QT_PATH "C:/Qt")
-set(QT_ENV_PATH "${QT_PATH}/6.8.0/mingw_64")
+set(QT_ENV_PATH "${QT_PATH}/6.8.1/msvc2022_64")
 
 # Displays the paths we have just set in console (if in verbose)
-message(VERBOSE "QT Path: ${QT_PATH}")
-message(VERBOSE "QT Env: ${QT_ENV_PATH}")
+message(STATUS "QT Path: ${QT_PATH}")
+message(STATUS "QT Env: ${QT_ENV_PATH}")
 
 # Add a prefix path for the correct Qt install
 set(CMAKE_PREFIX_PATH ${QT_ENV_PATH})
@@ -106,7 +106,14 @@ set(CMAKE_AUTOUIC ON)
 
 # Find an load the Qt libraries
 find_package(Qt6 REQUIRED COMPONENTS Core Widgets)
-link_libraries(Qt6::Core Qt6::Widgets)
+
+# TODO Comment
+# 
+if(${Qt6_FOUND})
+    message("Found Qt " ${Qt6_VERSION})
+else()
+    message("Couldn't find Qt")
+endif()
 
 #----------------------------------------------------------------------------------------------------------------------#
 # Package Directories
@@ -122,7 +129,7 @@ set(BREACHED_TS_SRC
     ${CMAKE_CURRENT_SOURCE_DIR}/src/plugin.h
     ${CMAKE_CURRENT_SOURCE_DIR}/src/plugin.cpp
 )
-source_group("BREACHED_TS_SRC" FILES ${BREACHED_TS_SRC})
+source_group("Breached Teamspeak" FILES ${BREACHED_TS_SRC})
 
 #----------------------------------------------------------------------------------------------------------------------#
 # Global Properties
@@ -142,7 +149,7 @@ add_library(${PROJECT_NAME} SHARED
 set_target_properties(${PROJECT_NAME} PROPERTIES
     CMAKE_C_STANDARD 99
     C_STANDARD_REQUIRED on
-    #CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -O2 -Wall -fPIC"
+    CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -O2 -Wall -fPIC"
 )
 
 # Enforce the use of the correct CXX standards
@@ -163,5 +170,7 @@ if ((MSVC) AND (MSVC_VERSION GREATER_EQUAL 1914))
         "/permissive-"
     )
 endif()
+
+target_link_libraries(${PROJECT_NAME} PUBLIC Qt6::Core Qt6::Widgets)
 
 #----------------------------------------------------------------------------------------------------------------------#
