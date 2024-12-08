@@ -1,0 +1,25 @@
+{
+    "configurations": [
+        {
+            "name": "Win32",
+            "includePath": [
+                "${workspaceFolder}/libs/ts3-plugin-sdk/include",
+                "${workspaceFolder}/include",
+                "${workspaceFolder}/src",
+                "C:/Qt/6.8.0/mingw_64/include"
+            ],
+            "defines": [
+                "_DEBUG",
+                "UNICODE",
+                "_UNICODE"
+            ],
+            "windowsSdkVersion": "10.0.22621.0",
+            "cStandard": "c99",
+            "compilerPath": "cl.exe",
+            "cppStandard": "c++17",
+            "configurationProvider": "ms-vscode.cmake-tools",
+            "compilerArgs": []
+        }
+    ],
+    "version": 4
+}

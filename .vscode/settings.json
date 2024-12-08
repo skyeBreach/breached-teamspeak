@@ -1,0 +1,329 @@
+{
+    "cmake.buildDirectory": "${workspaceFolder}/.build",
+    "cmake.allowCommentsInPresetsFile": true,
+    "cSpell.words": [
+        "AUTOMOC",
+        "AUTORCC",
+        "AUTOUIC",
+        "cplusplus",
+        "MSVC",
+        "pluginsdk",
+        "STREQUAL",
+        "Teamspeak",
+        "vcproj"
+    ],
+    "C_Cpp.default.cppStandard": "c++17",
+
+    // Enables comment formatting for multiline/block comments
+    "better-comments.multilineComments": true,
+
+    // Enable/disable hightlight plain text.
+    "better-comments.highlightPlainText": false,
+
+    // Used to define any custom comment formatting tags, and overwrite the defaults
+    "better-comments.tags": [
+        
+        /**
+         * # Title Comment
+         * Used to indicate the title of a group of comments, or a block comment
+         *
+         * Examples:
+         * # This is an example title
+         * # Extended User Config
+         */
+        {
+            "tag": "#",
+            "color": "#c3f4fb",
+            "strikethrough": false,
+            "underline": true,
+            "backgroundColor": "transparent",
+            "bold": true,
+            "italic": false,
+        },
+        /**
+         * # Heading Comment
+         * Used to indicate a section heading in a group of comments, or a block comment
+         *
+         * Examples:
+         * ~# This is an example heading
+         * ~# Description
+         */
+        {
+            "tag": "~#",
+            "color": "#a6cfd5",
+            "strikethrough": false,
+            "underline": false,
+            "backgroundColor": "transparent",
+            "bold": true,
+            "italic": false,
+        },
+        /**
+         * # Seperator Comment
+         * Used to format both the function and code seperators title and the seperator its self
+         *
+         * Examples:
+         * ~ This is an Section Title
+         * ~ Config Definition Utilities
+         */
+        {
+            "tag": "~",
+            "color": "#b11aff",
+            "strikethrough": false,
+            "underline": false,
+            "backgroundColor": "transparent",
+            "bold": true,
+            "italic": false,
+        },
+        /**
+         * # Alerts comment
+         * Used to alert the developer to an issue or important comment
+         *
+         * Examples:
+         * ! Example alert comment
+         * ! Depreciated method, do not use
+         * ! This is an alert
+         */
+        {
+            "tag": "!",
+            "color": "#FF2D00",
+            "strikethrough": false,
+            "underline": false,
+            "backgroundColor": "transparent",
+            "bold": true,
+            "italic": false,
+        },
+        /**
+         * # Query comment
+         * Used to indicate a query or question about the code
+         *
+         * Examples:
+         * ? Example query comment
+         * ? Should this be moved to the types folder
+         * ? Can we use an external API to achieve this, in a better way
+         */
+        {
+            "tag": "?",
+            "color": "#3498DB",
+            "strikethrough": false,
+            "underline": false,
+            "backgroundColor": "transparent",
+            "bold": false,
+            "italic": false,
+        },
+        /**
+         * # Commented out code
+         * Used when code is being commented out, to show it should'nt be there
+         *
+         * Examples:
+         * // this.lineOfCode() = commentedOut
+         */
+        {
+            "tag": "//",
+            "color": "#474747",
+            "strikethrough": true,
+            "underline": false,
+            "backgroundColor": "transparent",
+            "bold": false,
+            "italic": false,
+        },
+        /**
+         * # Highlighted comment
+         * Used when you need a comment to be highlighted against the other comments
+         *
+         * Examples:
+         * * This comment is required, if removed the code will break (No we don't know why, so don't ask)!
+         */
+        {
+            "tag": "*",
+            "color": "#98C379",
+            "strikethrough": false,
+            "underline": false,
+            "backgroundColor": "transparent",
+            "bold": true,
+            "italic": false,
+        },
+        /**
+         * # Completed checkbox components
+         * These are used to change the formatting of a TODO or BUG/FIX item to greyed out when completed
+         *
+         * Examples:
+         * [x] TODO: End the world
+         * - [x] TODO: Find the answer to the Ultimate Question of Life, the Universe, and Everything
+         */
+        {
+            "tag": ["[x]", "- [x]"],
+            "color": "#6a6758",
+            "strikethrough": false,
+            "underline": false,
+            "backgroundColor": "transparent",
+            "bold": false,
+            "italic": false,
+        },
+        /**
+         * # TODO task/item comment
+         * Used to indicate that there is a todo task/item here
+         *
+         * Examples:
+         * TODO: Rewrite this object to be simpler to use
+         * [ ] CHORE: Refactor this method to work with the new flat config approach
+         * - [ ] TODO: Rewrite this function comment to be TSDoc compliant
+         */
+        {
+            "tag": [
+                "todo:",
+                "[ ] todo:",
+                "- [ ] todo:",
+                "chore:",
+                "[ ] chore:",
+                "- [ ] chore:",
+            ],
+            "color": "#FF8C00",
+            "strikethrough": false,
+            "underline": false,
+            "backgroundColor": "transparent",
+            "bold": false,
+            "italic": false,
+        },
+        /**
+         * # Bug/Fix item comment
+         * Used to define/note a bug that is present in the code or a fix that is needed
+         *
+         * Examples:
+         * BUG: Button click downloads the internet, instead of a file
+         * [ ] FIX: API call gives the persons age instead of their address
+         * - [ ] BUG: This function stopped working after v1.5
+         */
+        {
+            "tag": [
+                "bug:",
+                "[ ] bug:",
+                "- [ ] bug:",
+                "fix:",
+                "[ ] fix:",
+                "- [ ] fix:",
+            ],
+            "color": "#FF2D00",
+            "strikethrough": false,
+            "underline": false,
+            "backgroundColor": "transparent",
+            "bold": true,
+            "italic": false,
+        },
+        /**
+         * # Bookmark comment
+         * Used to note a place worth coming back to (ie acts as a bookmark but its a comment)
+         *
+         * Examples:
+         * MARK: Come back later to implement this
+         */
+        {
+            "tag": "mark:",
+            "color": "#f828ed",
+            "strikethrough": false,
+            "underline": false,
+            "backgroundColor": "transparent",
+            "bold": false,
+            "italic": false,
+        },
+        /**
+         * # ConfigureMe Comment
+         * Used to mark default values that should be configured by the developer
+         *
+         * Examples:
+         * ConfigureMe: Add your API key here
+         * ConfigureMe: Disable once you have have fully set this package up
+         */
+        {
+            "tag": "ConfigureMe:",
+            "color": "#BEA9DF",
+            "strikethrough": false,
+            "underline": false,
+            "backgroundColor": "transparent",
+            "bold": true,
+            "italic": false,
+        },
+    ],
+
+    // Disabled to stop it from breaking Better-Comments
+    "todo-tree.highlights.enabled": false,
+
+    // Tags for todo-tree to look out for
+    "todo-tree.general.tags": [
+        "TODO",
+        "todo",
+        "CHORE",
+        "chore",
+        "BUG",
+        "FIX",
+        "fix",
+        "MARK",
+        "mark",
+    ],
+
+    // Groups the above tags under groups to make this easier to use
+    "todo-tree.general.tagGroups": {
+        "CHORE": ["CHORE", "chore"],
+        "TODO": ["TODO", "todo"],
+        "BUG": ["BUG", "FIX", "FIXME", "fix", "fixme"],
+        "MARK": ["MARK", "mark"],
+    },
+
+    // Regex used to find the above tag set within the comments
+    "todo-tree.regex.regex": "((//|#|<!--|;|/\\*|^|^\\s*(-|\\d+.))((\\s+(!|\\?|\\*|\\-))?(\\s+\\[ \\])?|(\\s+(!|\\?|\\*)\\s+\\[.\\])?)\\s*($TAGS)\\s*:)", //"((//|#|<!--|;|/\\*|^)((\\s+(!|\\?|\\*|\\-))?(\\s+\\[ \\])?|(\\s+(!|\\?|\\*)\\s+\\[.\\])?)\\s*($TAGS)\\s*:)",
+
+    // Custom item formatting, this allows us to set the icons in the 'TODO's' viewer
+    "todo-tree.highlights.customHighlight": {
+        "CHORE": {
+            "icon": "pencil",
+        },
+        "TODO": {
+            "icon": "checklist",
+        },
+        "BUG": {
+            "icon": "bug",
+        },
+        "MARK": {
+            "icon": "bookmark",
+        },
+    },
+
+    // Set custom text formatting for the item labels in the 'TODO's' viewer
+    "todo-tree.tree.labelFormat": "${tag:uppercase} ${after} [${filename}]",
+
+    // Set custom text formatting for the item tooltips (hover) in the 'TODO's' viewer
+    "todo-tree.tree.tooltipFormat": "${filename}:[${line}] in ${filepath}",
+
+    // Globs excluded from 'todo-tree', mainly used here to exclude '.vscode' and 'node_modules'
+    "todo-tree.filtering.excludeGlobs": [
+        "**/node_modules/*/**",
+        "**/.vscode/**",
+    ],
+
+    // TODO: Comment
+    // 
+    "cmake.options.statusBarVisibility": "visible",
+    "cmake.enabledOutputParsers": [
+        "cmake",
+        "gnuld",
+        "msvc",
+        "ghs",
+        "diab"
+    ],
+
+    // TODO: Comment
+    //  
+    "C_Cpp.default.compilerPath": "cl.exe",
+    "C_Cpp.doxygen.generatedStyle": "/**",
+    
+    // TODO: Comment
+    // 
+    "editor.defaultFormatter": "hakua.doxygen-previewer",
+
+    // TODO: Comment
+    // 
+    "cmake.configureArgs": [
+        "--log-level=STATUS"
+    ],
+    "comments.visible": false,
+    "editor.mouseWheelZoom": true
+}
