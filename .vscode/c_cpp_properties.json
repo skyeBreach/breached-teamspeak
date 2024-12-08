@@ -3,10 +3,10 @@
         {
             "name": "Win32",
             "includePath": [
-                "${workspaceFolder}/libs/ts3-plugin-sdk/include",
+                "${workspaceFolder}/libs/ts3client-pluginsdk/include",
                 "${workspaceFolder}/include",
                 "${workspaceFolder}/src",
-                "C:/Qt/6.8.0/mingw_64/include"
+                "C:/Qt/6.8.1/msvc2022_64/include"
             ],
             "defines": [
                 "_DEBUG",
