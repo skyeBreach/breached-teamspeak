@@ -64,8 +64,6 @@ set(CMAKE_PREFIX_PATH ${QT_ENV_PATH})
 
 # Set all CMake Qt auto flags to true
 set(CMAKE_AUTOMOC ON)
-set(CMAKE_AUTORCC ON)
-set(CMAKE_AUTOUIC ON)
 
 # Find an load the Qt libraries
 find_package(Qt6 REQUIRED COMPONENTS Core Widgets)
