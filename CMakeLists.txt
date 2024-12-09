@@ -1,5 +1,15 @@
+#----------------------------------------------------------------------------------------------------------------------#
+# CMake Versioning
 
+# TODO: IDk if this is fully true
+# Set CMake to use version 3.21, as it is the highest version Qt allows
 cmake_minimum_required(VERSION 3.21)
+
+# Ensures that all source files have their extensions explicitly listed, as this is the new behavior of CMake
+if(${CMAKE_VERSION} VERSION_GREATER_EQUAL "3.20")
+	cmake_policy(SET CMP0115 NEW)
+endif()
+
 
 #----------------------------------------------------------------------------------------------------------------------#
 # Qt UI Library 
@@ -10,7 +20,7 @@ set(CMAKE_INCLUDE_CURRENT_DIR ON)
 # Set all CMake Qt auto flags to true
 set(CMAKE_AUTOMOC ON)
 
-# TODO: Move
+# TODO: Move to be apart of the build script, setup script
 # Add a prefix path for the correct Qt install
 set(CMAKE_PREFIX_PATH "C:/Qt/5.12.3/5.12.3/msvc2017_64")
 
@@ -19,7 +29,7 @@ find_package(Qt5 REQUIRED COMPONENTS Core Widgets)
 
 # If we found Qt then load it, and if not we must abort and call a fatal
 if(${Qt5_FOUND})
-    message(Verbose "Found Qt " ${Qt5_VERSION})
+    message(VERBOSE "Found Qt " ${Qt5_VERSION})
     link_libraries(Qt5::Core Qt5::Widgets)
 else()
     message(
