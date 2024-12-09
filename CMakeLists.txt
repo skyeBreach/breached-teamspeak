@@ -23,33 +23,13 @@ if(PROJECT_SOURCE_DIR STREQUAL PROJECT_BINARY_DIR)
     )
 endif()
 
-#----------------------------------------------------------------------------------------------------------------------#
-# Project Metadata
 
-# Read the config metadata JSON file 
-file(READ ${CMAKE_CURRENT_LIST_DIR}/config/plugin.json PluginConfigData)
-
-# Define the projects information metadata from the provided metadata.json config 
-string(JSON PROJECT_NAME            GET ${PluginConfigData} name        ) 
-string(JSON PROJECT_LABEL           GET ${PluginConfigData} label       )
-string(JSON PROJECT_VERSION         GET ${PluginConfigData} version     )
-string(JSON PROJECT_DESCRIPTION     GET ${PluginConfigData} description ) 
-string(JSON PROJECT_HOMEPAGE_URL    GET ${PluginConfigData} homepage    )
-
-# Initialize the project information based off of the metadata
-project(
-	${PROJECT_NAME}
-    VERSION ${PROJECT_VERSION}
-    HOMEPAGE_URL ${PROJECT_HOMEPAGE_URL}
-    DESCRIPTION ${PROJECT_DESCRIPTION}
-	LANGUAGES CXX
-)
-
-# Find includes in corresponding build directories
-set(CMAKE_INCLUDE_CURRENT_DIR ON)
 
 #----------------------------------------------------------------------------------------------------------------------#
 # Qt UI Library 
+
+# Find includes in corresponding build directories
+set(CMAKE_INCLUDE_CURRENT_DIR ON)
 
 # Defines the paths for Qt, so CMake knows where it is
 set(QT_PATH "C:/Qt")
@@ -84,7 +64,7 @@ endif(${Qt6_FOUND})
 
 # Assign include directories
 include_directories(
-    "libs/ts3client-pluginsdk/include"
+    "${CMAKE_CURRENT_LIST_DIR}/libs/ts3client-pluginsdk/include"
 )
 
 # Store all of the packages source files in a variable and assign these to there own source_group
