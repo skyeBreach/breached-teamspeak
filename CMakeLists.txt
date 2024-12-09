@@ -10,7 +10,6 @@ if(${CMAKE_VERSION} VERSION_GREATER_EQUAL "3.20")
 	cmake_policy(SET CMP0115 NEW)
 endif()
 
-
 #----------------------------------------------------------------------------------------------------------------------#
 # Qt UI Library 
 
@@ -20,12 +19,8 @@ set(CMAKE_INCLUDE_CURRENT_DIR ON)
 # Set all CMake Qt auto flags to true
 set(CMAKE_AUTOMOC ON)
 
-# TODO: Move to be apart of the build script, setup script
-# Add a prefix path for the correct Qt install
-set(CMAKE_PREFIX_PATH "C:/Qt/5.12.3/5.12.3/msvc2017_64")
-
 # Find an load the Qt libraries
-find_package(Qt5 REQUIRED COMPONENTS Core Widgets)
+find_package(Qt5 COMPONENTS Core Widgets REQUIRED )
 
 # If we found Qt then load it, and if not we must abort and call a fatal
 if(${Qt5_FOUND})
@@ -44,7 +39,6 @@ endif(${Qt5_FOUND})
 # Assign include directories
 include_directories(
     "${CMAKE_CURRENT_LIST_DIR}/libs/ts3client-pluginsdk/include"
-    "${CMAKE_CURRENT_LIST_DIR}/include/breached-teamspeak"
     "${CMAKE_CURRENT_LIST_DIR}/src"
 )
 
@@ -53,6 +47,5 @@ set(BREACHED_TS_SRC
     ${CMAKE_CURRENT_LIST_DIR}/src/breached-plugin.h
     ${CMAKE_CURRENT_LIST_DIR}/src/breached-plugin.cpp
 )
-source_group("Breached Teamspeak" FILES ${BREACHED_TS_SRC})
 
 #----------------------------------------------------------------------------------------------------------------------#
