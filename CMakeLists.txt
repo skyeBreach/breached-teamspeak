@@ -26,14 +26,14 @@ endif()
 #----------------------------------------------------------------------------------------------------------------------#
 # Project Metadata
 
-# Read the config metadata JSON file
-file(READ ${CMAKE_CURRENT_SOURCE_DIR}/config/plugin.json PluginConfigData)
+# Read the config metadata JSON file 
+file(READ ${CMAKE_CURRENT_LIST_DIR}/config/plugin.json PluginConfigData)
 
 # Define the projects information metadata from the provided metadata.json config 
-string(JSON PROJECT_NAME            GET ${PluginConfigData} name        )
+string(JSON PROJECT_NAME            GET ${PluginConfigData} name        ) 
 string(JSON PROJECT_LABEL           GET ${PluginConfigData} label       )
 string(JSON PROJECT_VERSION         GET ${PluginConfigData} version     )
-string(JSON PROJECT_DESCRIPTION     GET ${PluginConfigData} description )
+string(JSON PROJECT_DESCRIPTION     GET ${PluginConfigData} description ) 
 string(JSON PROJECT_HOMEPAGE_URL    GET ${PluginConfigData} homepage    )
 
 # Initialize the project information based off of the metadata
@@ -49,46 +49,6 @@ project(
 set(CMAKE_INCLUDE_CURRENT_DIR ON)
 
 #----------------------------------------------------------------------------------------------------------------------#
-# C++ Build Info
-
-# Define the projects build type and environment based on what the CMake build type
-if(CMAKE_BUILD_TYPE STREQUAL "RelWithDebInfo")
-    set(PROJECT_BUILD_TYPE  "RelWithDebInfo")
-    set(PROJECT_BUILD_ENV   "Production")
-elseif(CMAKE_BUILD_TYPE STREQUAL "Release")
-    set(PROJECT_BUILD_TYPE  "Release")
-    set(PROJECT_BUILD_ENV   "Production")
-elseif(CMAKE_BUILD_TYPE STREQUAL "MinSizeRel")
-    set(PROJECT_BUILD_TYPE  "MinSizeRel")
-    set(PROJECT_BUILD_ENV   "Production")
-else()
-    set(PROJECT_BUILD_TYPE  "Debug")
-    set(PROJECT_BUILD_ENV   "Development")
-endif()
-
-# Warn when we are in a Debug or Development environment
-if(${PROJECT_BUILD_TYPE} STREQUAL "Debug" OR ${PROJECT_BUILD_ENV} STREQUAL "Development")
-    message(
-        VERBOSE
-        "Currently in a 'Debug' or 'Development' build, this package/library must not be released in this state!"
-    )
-endif()
-
-# Display the current build configuration
-message(STATUS "Build Type: ${PROJECT_BUILD_TYPE}")
-message(STATUS "Build Env : ${PROJECT_BUILD_ENV}")
-
-# Define the projects build metadata
-string(TIMESTAMP PROJECT_BUILD_DATE "%Y-%m-%d")
-
-# Create a build header and populate it with the current build information (e.g. version, date, environment, and config)
-configure_file(
-    ${CMAKE_SOURCE_DIR}/src/build.h
-    ${CMAKE_CURRENT_BINARY_DIR}/src/build.h
-    @ONLY
-)
-
-#----------------------------------------------------------------------------------------------------------------------#
 # Qt UI Library 
 
 # Defines the paths for Qt, so CMake knows where it is
@@ -97,7 +57,7 @@ set(QT_ENV_PATH "${QT_PATH}/6.8.1/msvc2022_64")
 
 # Displays the paths we have just set in console (if in verbose)
 message(Verbose "QT Path: ${QT_PATH}")
-message(Verbose "QT Env: ${QT_ENV_PATH}")
+message(Verbose "QT Env : ${QT_ENV_PATH}")
 
 # Add a prefix path for the correct Qt install
 set(CMAKE_PREFIX_PATH ${QT_ENV_PATH})
@@ -131,9 +91,8 @@ include_directories(
 
 # Store all of the packages source files in a variable and assign these to there own source_group
 set(BREACHED_TS_SRC
-    ${CMAKE_CURRENT_BINARY_DIR}/src/build.h
-    ${CMAKE_CURRENT_SOURCE_DIR}/src/plugin.h
-    ${CMAKE_CURRENT_SOURCE_DIR}/src/plugin.cpp
+    ${CMAKE_CURRENT_LIST_DIR}/src/plugin.h
+    ${CMAKE_CURRENT_LIST_DIR}/src/plugin.cpp
 )
 source_group("Breached Teamspeak" FILES ${BREACHED_TS_SRC})
 
