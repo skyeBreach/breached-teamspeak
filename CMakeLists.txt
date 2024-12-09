@@ -1,35 +1,14 @@
-#----------------------------------------------------------------------------------------------------------------------#
-# CMake Versioning
 
-# Set CMake to use version 3.21, as it is the highest version Qt allows
 cmake_minimum_required(VERSION 3.21)
-
-# Ensures that all source files have their extensions explicitly listed, as this is the new behavior of CMake
-if(${CMAKE_VERSION} VERSION_GREATER_EQUAL "3.20")
-	cmake_policy(SET CMP0115 NEW)
-endif()
-
-#----------------------------------------------------------------------------------------------------------------------#
-# Package/Library Guards
-
-# Enforce a global include guard here, this may not be needed now but may be in future
-include_guard(GLOBAL)
-
-# Make sure that the build or configure command hasn't been called at the root directory
-if(PROJECT_SOURCE_DIR STREQUAL PROJECT_BINARY_DIR)
-    message(
-        FATAL_ERROR
-            "Builds can not be run from the src directory. You must make a build directory and run CMake from there."
-    )
-endif()
-
-
 
 #----------------------------------------------------------------------------------------------------------------------#
 # Qt UI Library 
 
 # Find includes in corresponding build directories
 set(CMAKE_INCLUDE_CURRENT_DIR ON)
+
+# Set all CMake Qt auto flags to true
+set(CMAKE_AUTOMOC ON)
 
 # Defines the paths for Qt, so CMake knows where it is
 set(QT_PATH "C:/Qt")
@@ -41,9 +20,6 @@ message(Verbose "QT Env : ${QT_ENV_PATH}")
 
 # Add a prefix path for the correct Qt install
 set(CMAKE_PREFIX_PATH ${QT_ENV_PATH})
-
-# Set all CMake Qt auto flags to true
-set(CMAKE_AUTOMOC ON)
 
 # Find an load the Qt libraries
 find_package(Qt6 REQUIRED COMPONENTS Core Widgets)
@@ -65,6 +41,8 @@ endif(${Qt6_FOUND})
 # Assign include directories
 include_directories(
     "${CMAKE_CURRENT_LIST_DIR}/libs/ts3client-pluginsdk/include"
+    "${CMAKE_CURRENT_LIST_DIR}/include/breached-teamspeak"
+    "${CMAKE_CURRENT_LIST_DIR}/src"
 )
 
 # Store all of the packages source files in a variable and assign these to there own source_group

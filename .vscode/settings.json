@@ -322,7 +322,7 @@
     // TODO: Comment
     // 
     "cmake.configureArgs": [
-        "--log-level=STATUS"
+        "--log-level=VERBOSE"
     ],
     "comments.visible": false,
     "editor.mouseWheelZoom": true,
