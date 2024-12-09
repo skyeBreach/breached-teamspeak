@@ -10,30 +10,23 @@ set(CMAKE_INCLUDE_CURRENT_DIR ON)
 # Set all CMake Qt auto flags to true
 set(CMAKE_AUTOMOC ON)
 
-# Defines the paths for Qt, so CMake knows where it is
-set(QT_PATH "C:/Qt")
-set(QT_ENV_PATH "${QT_PATH}/6.8.1/msvc2022_64")
-
-# Displays the paths we have just set in console (if in verbose)
-message(Verbose "QT Path: ${QT_PATH}")
-message(Verbose "QT Env : ${QT_ENV_PATH}")
-
+# TODO: Move
 # Add a prefix path for the correct Qt install
-set(CMAKE_PREFIX_PATH ${QT_ENV_PATH})
+set(CMAKE_PREFIX_PATH "C:/Qt/5.12.3/5.12.3/msvc2017_64")
 
 # Find an load the Qt libraries
-find_package(Qt6 REQUIRED COMPONENTS Core Widgets)
+find_package(Qt5 REQUIRED COMPONENTS Core Widgets)
 
 # If we found Qt then load it, and if not we must abort and call a fatal
-if(${Qt6_FOUND})
-    message(Verbose "Found Qt " ${Qt6_VERSION})
-    link_libraries(Qt6::Core Qt6::Widgets)
+if(${Qt5_FOUND})
+    message(Verbose "Found Qt " ${Qt5_VERSION})
+    link_libraries(Qt5::Core Qt5::Widgets)
 else()
     message(
         FATAL_ERROR 
         "The Qt libraries could not be found, Make sure that your QT_PATH is properly set. Aborting as Qt is required!"
     )
-endif(${Qt6_FOUND})
+endif(${Qt5_FOUND})
 
 #----------------------------------------------------------------------------------------------------------------------#
 # Package Directories
