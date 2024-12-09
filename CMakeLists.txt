@@ -45,6 +45,9 @@ project(
 	LANGUAGES CXX
 )
 
+# Find includes in corresponding build directories
+set(CMAKE_INCLUDE_CURRENT_DIR ON)
+
 #----------------------------------------------------------------------------------------------------------------------#
 # C++ Build Info
 
@@ -67,7 +70,7 @@ endif()
 if(${PROJECT_BUILD_TYPE} STREQUAL "Debug" OR ${PROJECT_BUILD_ENV} STREQUAL "Development")
     message(
         VERBOSE
-            "Currently in a 'Debug' or 'Development' build, this package/library must not be released in this state!${}"
+        "Currently in a 'Debug' or 'Development' build, this package/library must not be released in this state!"
     )
 endif()
 
@@ -93,8 +96,8 @@ set(QT_PATH "C:/Qt")
 set(QT_ENV_PATH "${QT_PATH}/6.8.1/msvc2022_64")
 
 # Displays the paths we have just set in console (if in verbose)
-message(STATUS "QT Path: ${QT_PATH}")
-message(STATUS "QT Env: ${QT_ENV_PATH}")
+message(Verbose "QT Path: ${QT_PATH}")
+message(Verbose "QT Env: ${QT_ENV_PATH}")
 
 # Add a prefix path for the correct Qt install
 set(CMAKE_PREFIX_PATH ${QT_ENV_PATH})
@@ -107,13 +110,16 @@ set(CMAKE_AUTOUIC ON)
 # Find an load the Qt libraries
 find_package(Qt6 REQUIRED COMPONENTS Core Widgets)
 
-# TODO Comment
-# 
+# If we found Qt then load it, and if not we must abort and call a fatal
 if(${Qt6_FOUND})
-    message("Found Qt " ${Qt6_VERSION})
+    message(Verbose "Found Qt " ${Qt6_VERSION})
+    link_libraries(Qt6::Core Qt6::Widgets)
 else()
-    message("Couldn't find Qt")
-endif()
+    message(
+        FATAL_ERROR 
+        "The Qt libraries could not be found, Make sure that your QT_PATH is properly set. Aborting as Qt is required!"
+    )
+endif(${Qt6_FOUND})
 
 #----------------------------------------------------------------------------------------------------------------------#
 # Package Directories
@@ -130,47 +136,5 @@ set(BREACHED_TS_SRC
     ${CMAKE_CURRENT_SOURCE_DIR}/src/plugin.cpp
 )
 source_group("Breached Teamspeak" FILES ${BREACHED_TS_SRC})
-
-#----------------------------------------------------------------------------------------------------------------------#
-# Global Properties
-
-# Enables the ability to create folders to organize projects for the .vcproj
-set_property(GLOBAL PROPERTY USE_FOLDERS ON)
-
-#----------------------------------------------------------------------------------------------------------------------#
-# Project Library Definition and Properties
-
-# Add main project "Shared" library that will be exported by this package
-add_library(${PROJECT_NAME} SHARED
-    ${BREACHED_TS_SRC}
-)
-
-# Enforce the use of the correct C standards
-set_target_properties(${PROJECT_NAME} PROPERTIES
-    CMAKE_C_STANDARD 99
-    C_STANDARD_REQUIRED on
-    CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -O2 -Wall -fPIC"
-)
-
-# Enforce the use of the correct CXX standards
-set_target_properties(${PROJECT_NAME} PROPERTIES
-    CXX_STANDARD 17
-    CXX_STANDARD_REQUIRED ON
-)
-
-# Ensure that CMake outputs its compiler commands when generating
-set_target_properties(${PROJECT_NAME} PROPERTIES
-    CMAKE_EXPORT_COMPILE_COMMANDS ON
-)
-
-# MSVC compiler options
-if ((MSVC) AND (MSVC_VERSION GREATER_EQUAL 1914))
-    target_compile_options(${PROJECT_NAME} PUBLIC
-        "/Zc:__cplusplus"
-        "/permissive-"
-    )
-endif()
-
-target_link_libraries(${PROJECT_NAME} PUBLIC Qt6::Core Qt6::Widgets)
 
 #----------------------------------------------------------------------------------------------------------------------#
