@@ -89,8 +89,8 @@ include_directories(
 
 # Store all of the packages source files in a variable and assign these to there own source_group
 set(BREACHED_TS_SRC
-    ${CMAKE_CURRENT_LIST_DIR}/src/plugin.h
-    ${CMAKE_CURRENT_LIST_DIR}/src/plugin.cpp
+    ${CMAKE_CURRENT_LIST_DIR}/src/breached-plugin.h
+    ${CMAKE_CURRENT_LIST_DIR}/src/breached-plugin.cpp
 )
 source_group("Breached Teamspeak" FILES ${BREACHED_TS_SRC})
 
