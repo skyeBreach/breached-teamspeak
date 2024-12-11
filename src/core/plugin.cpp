@@ -52,6 +52,9 @@ int PluginBase::Initialize()
 void PluginBase::Configure()
 {}
 
-void PluginBase::Shutdown() {}
+void PluginBase::Shutdown() 
+{
+
+}
 
 /*--------------------------------------------------------------------------------------------------------------------*/

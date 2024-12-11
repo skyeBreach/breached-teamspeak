@@ -5,11 +5,13 @@
         "AUTOMOC",
         "AUTORCC",
         "AUTOUIC",
+        "buildsystems",
         "cplusplus",
         "MSVC",
         "pluginsdk",
         "STREQUAL",
         "Teamspeak",
+        "vcpkg",
         "vcproj"
     ],
     "C_Cpp.default.cppStandard": "c++17",
@@ -321,7 +323,7 @@
     // TODO: Comment
     // 
     "cmake.configureArgs": [
-        "--log-level=VERBOSE"
+        "--log-level=VERBOSE",
     ],
     "comments.visible": false,
     "editor.mouseWheelZoom": true,

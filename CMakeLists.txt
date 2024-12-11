@@ -11,6 +11,11 @@ if(${CMAKE_VERSION} VERSION_GREATER_EQUAL "3.20")
 endif()
 
 #----------------------------------------------------------------------------------------------------------------------#
+# VCPKG Setup
+
+set(CMAKE_TOOLCHAIN_FILE "$ENV{VCPKG_ROOT}/scripts/buildsystem/vcpkg.cmake")
+
+#----------------------------------------------------------------------------------------------------------------------#
 # Qt UI Library 
 
 # Find includes in corresponding build directories
@@ -46,6 +51,8 @@ endif(${Qt5_FOUND})
 # Remove message indentation
 list(POP_BACK CMAKE_MESSAGE_INDENT)
 
+
+
 #----------------------------------------------------------------------------------------------------------------------#
 # Package Directories
 
@@ -54,7 +61,7 @@ include_directories(
     "${CMAKE_CURRENT_LIST_DIR}/libs/ts3client-pluginsdk/include"
     "${CMAKE_CURRENT_LIST_DIR}/include"
 )
-
+ 
 # Store all of the packages source files in a variable and assign these to there own source_group
 set(BREACHED_TS_SRC
     ${CMAKE_CURRENT_LIST_DIR}/include/breached-teamspeak/core/plugin.h
@@ -62,5 +69,6 @@ set(BREACHED_TS_SRC
     ${CMAKE_CURRENT_LIST_DIR}/include/breached-teamspeak/teamspeak.h
     ${CMAKE_CURRENT_LIST_DIR}/src/teamspeak.cpp
 )
+
 
 #----------------------------------------------------------------------------------------------------------------------#
