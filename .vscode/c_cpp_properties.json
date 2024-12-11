@@ -5,8 +5,7 @@
             "includePath": [
                 "${workspaceFolder}/libs/ts3client-pluginsdk/include",
                 "${workspaceFolder}/include",
-                "${workspaceFolder}/src",
-                "C:/Qt/6.8.1/msvc2022_64/include"
+                "C:/Qt/5.12.3/5.12.3/msvc2017_64/include"
             ],
             "defines": [
                 "_DEBUG",
@@ -18,7 +17,8 @@
             "compilerPath": "cl.exe",
             "cppStandard": "c++17",
             "configurationProvider": "ms-vscode.cmake-tools",
-            "compilerArgs": []
+            "compilerArgs": [],
+            "intelliSenseMode": "windows-msvc-x64"
         }
     ],
     "version": 4

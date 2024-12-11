@@ -22,7 +22,6 @@
 
     // Used to define any custom comment formatting tags, and overwrite the defaults
     "better-comments.tags": [
-        
         /**
          * # Title Comment
          * Used to indicate the title of a group of comments, or a block comment
@@ -393,5 +392,6 @@
         "xtr1common": "cpp",
         "xtree": "cpp",
         "xutility": "cpp"
-    }
+    },
+    "better-comments.languages": []
 }
