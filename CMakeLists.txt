@@ -19,19 +19,32 @@ set(CMAKE_INCLUDE_CURRENT_DIR ON)
 # Set all CMake Qt auto flags to true
 set(CMAKE_AUTOMOC ON)
 
+# Start a "check message" block for the Qt lib search, and ensure block messages are indented
+message(
+    CHECK_START 
+    "Attempting to find Qt"
+)
+list(APPEND CMAKE_MESSAGE_INDENT "  ")
+
 # Find an load the Qt libraries
-find_package(Qt5 COMPONENTS Core Widgets REQUIRED )
+find_package(Qt5 COMPONENTS Core Widgets REQUIRED)
 
 # If we found Qt then load it, and if not we must abort and call a fatal
 if(${Qt5_FOUND})
-    message(VERBOSE "Found Qt " ${Qt5_VERSION})
     link_libraries(Qt5::Core Qt5::Widgets)
+    message(
+        CHECK_PASS 
+        "Qt v" ${Qt5_VERSION} " found, and has been linked"
+    )
 else()
     message(
-        FATAL_ERROR 
+        CHECK_FAIL 
         "The Qt libraries could not be found, Make sure that your QT_PATH is properly set. Aborting as Qt is required!"
     )
 endif(${Qt5_FOUND})
+
+# Remove message indentation
+list(POP_BACK CMAKE_MESSAGE_INDENT)
 
 #----------------------------------------------------------------------------------------------------------------------#
 # Package Directories
@@ -44,8 +57,8 @@ include_directories(
 
 # Store all of the packages source files in a variable and assign these to there own source_group
 set(BREACHED_TS_SRC
-    ${CMAKE_CURRENT_LIST_DIR}/include/breached-teamspeak/plugin.h
-    ${CMAKE_CURRENT_LIST_DIR}/src/plugin.cpp
+    ${CMAKE_CURRENT_LIST_DIR}/include/breached-teamspeak/core/plugin.h
+    ${CMAKE_CURRENT_LIST_DIR}/src/core/plugin.cpp
 )
 
 #----------------------------------------------------------------------------------------------------------------------#
