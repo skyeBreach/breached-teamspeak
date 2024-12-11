@@ -1,4 +1,4 @@
-struct TS3Functions;
+#include "ts3_functions.h"
 
 namespace breached {
     namespace teamspeak { 
