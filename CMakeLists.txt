@@ -59,6 +59,8 @@ include_directories(
 set(BREACHED_TS_SRC
     ${CMAKE_CURRENT_LIST_DIR}/include/breached-teamspeak/core/plugin.h
     ${CMAKE_CURRENT_LIST_DIR}/src/core/plugin.cpp
+    ${CMAKE_CURRENT_LIST_DIR}/include/breached-teamspeak/teamspeak.h
+    ${CMAKE_CURRENT_LIST_DIR}/src/teamspeak.cpp
 )
 
 #----------------------------------------------------------------------------------------------------------------------#
