@@ -112,4 +112,7 @@ set_target_properties(${PROJECT_NAME} PROPERTIES
     CXX_STANDARD 17
 )
 
+set_property(TARGET ${PROJECT_NAME}  PROPERTY
+             IMPORTED_LOCATION "${CMAKE_CURRENT_LIST_DIR}/.build/Debug/breached-teamspeak.dll")
+
 #----------------------------------------------------------------------------------------------------------------------#
