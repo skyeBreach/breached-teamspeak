@@ -1,6 +1,6 @@
 // TODO: Fill out your copyright notice and run the 'copyright-update' script
 
-#include "breached-plugin.h"
+#include "breached-teamspeak/plugin.h"
 
 #include "teamspeak/public_definitions.h"
 #include "ts3_functions.h"

@@ -29,10 +29,21 @@ public:
      */
     PluginBase(const std::string pluginID, QObject* parent = nullptr);
 
+    /**
+     * @brief 
+     * 
+     * @return 
+     */
     int Initialize();
 
+    /**
+     * @brief 
+     */
     void Configure();
 
+    /**
+     * @brief 
+     */
     void Shutdown();
 
 /*--------------------------------------------------------------------------------------------------------------------*/

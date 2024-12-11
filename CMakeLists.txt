@@ -39,13 +39,13 @@ endif(${Qt5_FOUND})
 # Assign include directories
 include_directories(
     "${CMAKE_CURRENT_LIST_DIR}/libs/ts3client-pluginsdk/include"
-    "${CMAKE_CURRENT_LIST_DIR}/src"
+    "${CMAKE_CURRENT_LIST_DIR}/include"
 )
 
 # Store all of the packages source files in a variable and assign these to there own source_group
 set(BREACHED_TS_SRC
-    ${CMAKE_CURRENT_LIST_DIR}/src/breached-plugin.h
-    ${CMAKE_CURRENT_LIST_DIR}/src/breached-plugin.cpp
+    ${CMAKE_CURRENT_LIST_DIR}/include/breached-teamspeak/plugin.h
+    ${CMAKE_CURRENT_LIST_DIR}/src/plugin.cpp
 )
 
 #----------------------------------------------------------------------------------------------------------------------#
