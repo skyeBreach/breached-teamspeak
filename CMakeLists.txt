@@ -38,7 +38,7 @@ project(
 # Dependency Config
 
 find_package(Boost COMPONENTS log REQUIRED)
-link_libraries(boost::log)
+link_libraries(Boost::log)
 
 #----------------------------------------------------------------------------------------------------------------------#
 # Qt UI Library 
@@ -61,7 +61,6 @@ find_package(Qt5 COMPONENTS Core Widgets REQUIRED)
 
 # If we found Qt then load it, and if not we must abort and call a fatal
 if(${Qt5_FOUND})
-    link_libraries(Qt5::Core Qt5::Widgets)
     message(
         CHECK_PASS 
         "Qt v" ${Qt5_VERSION} " found, and has been linked"
@@ -91,6 +90,26 @@ set(BREACHED_TS_SRC
     ${CMAKE_CURRENT_LIST_DIR}/src/core/plugin.cpp
     ${CMAKE_CURRENT_LIST_DIR}/include/breached-teamspeak/teamspeak.h
     ${CMAKE_CURRENT_LIST_DIR}/src/teamspeak.cpp
+)
+
+#----------------------------------------------------------------------------------------------------------------------#
+# 
+
+add_library(${PROJECT_NAME} SHARED
+    ${BREACHED_TS_SRC}
+)
+
+target_link_libraries(${PROJECT_NAME} PUBLIC 
+    Qt5::Core Qt5::Widgets
+)
+
+target_link_libraries(${PROJECT_NAME} PUBLIC 
+    Boost::log
+)
+
+# Enforce the use of the correct CXX standards
+set_target_properties(${PROJECT_NAME} PROPERTIES
+    CXX_STANDARD 17
 )
 
 #----------------------------------------------------------------------------------------------------------------------#
