@@ -1,19 +1,44 @@
 #----------------------------------------------------------------------------------------------------------------------#
-# CMake Versioning
+# CMake Setup
 
 # TODO: IDk if this is fully true
 # Set CMake to use version 3.21, as it is the highest version Qt allows
 cmake_minimum_required(VERSION 3.21)
 
-# Ensures that all source files have their extensions explicitly listed, as this is the new behavior of CMake
-if(${CMAKE_VERSION} VERSION_GREATER_EQUAL "3.20")
-	cmake_policy(SET CMP0115 NEW)
-endif()
+# Run all config safe guards
+include("${CMAKE_CURRENT_LIST_DIR}/cmake/modules/SafeGuard.cmake")
 
 #----------------------------------------------------------------------------------------------------------------------#
 # VCPKG Setup
 
-set(CMAKE_TOOLCHAIN_FILE "$ENV{VCPKG_ROOT}/scripts/buildsystem/vcpkg.cmake")
+# Set the toolchain file to "vcpkg.cmake", based off of a filepath normalized VCPKG_ROOT
+file(TO_CMAKE_PATH "$ENV{VCPKG_ROOT}/scripts/buildsystems/vcpkg.cmake" CMAKE_TOOLCHAIN_FILE)
+
+#----------------------------------------------------------------------------------------------------------------------#
+# Project Definition
+
+# Read the config metadata JSON file 
+file(READ ${CMAKE_CURRENT_LIST_DIR}/config/library.json PLUGIN_DATA_JSON)
+string(JSON PROJECT_NAME            GET ${PLUGIN_DATA_JSON} name)
+string(JSON PROJECT_VERSION         GET ${PLUGIN_DATA_JSON} version)
+string(JSON PROJECT_LABEL           GET ${PLUGIN_DATA_JSON} label)
+string(JSON PROJECT_DESCRIPTION     GET ${PLUGIN_DATA_JSON} description)
+string(JSON PROJECT_HOMEPAGE_URL    GET ${PLUGIN_DATA_JSON} homepage)
+
+# Set the project based off of the config file
+project(
+    ${PROJECT_NAME}
+    VERSION ${PROJECT_VERSION}
+    DESCRIPTION ${PROJECT_DESCRIPTION}
+    HOMEPAGE_URL ${PROJECT_HOMEPAGE_URL}
+	LANGUAGES CXX
+)
+
+#----------------------------------------------------------------------------------------------------------------------#
+# Dependency Config
+
+find_package(Boost COMPONENTS log REQUIRED)
+link_libraries(boost::log)
 
 #----------------------------------------------------------------------------------------------------------------------#
 # Qt UI Library 
@@ -26,7 +51,7 @@ set(CMAKE_AUTOMOC ON)
 
 # Start a "check message" block for the Qt lib search, and ensure block messages are indented
 message(
-    CHECK_START 
+    CHECK_START
     "Attempting to find Qt"
 )
 list(APPEND CMAKE_MESSAGE_INDENT "  ")
@@ -51,10 +76,8 @@ endif(${Qt5_FOUND})
 # Remove message indentation
 list(POP_BACK CMAKE_MESSAGE_INDENT)
 
-
-
 #----------------------------------------------------------------------------------------------------------------------#
-# Package Directories
+# Library Source and Include Files
 
 # Assign include directories
 include_directories(
@@ -69,6 +92,5 @@ set(BREACHED_TS_SRC
     ${CMAKE_CURRENT_LIST_DIR}/include/breached-teamspeak/teamspeak.h
     ${CMAKE_CURRENT_LIST_DIR}/src/teamspeak.cpp
 )
-
 
 #----------------------------------------------------------------------------------------------------------------------#
